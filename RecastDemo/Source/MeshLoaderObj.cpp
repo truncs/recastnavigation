@@ -223,13 +223,13 @@ bool rcMeshLoaderObj::load(const std::string& filename)
 		{
 			memset(matName, 0, 1024);
 			sscanf(row+7, "%s", matName);
-			if (_stricmp(matName, "road") == 0)
+			if (strcasecmp(matName, "road") == 0)
 				mat = SamplePolyAreas::SAMPLE_POLYAREA_ROAD;
-			else if (_stricmp(matName, "crosswalk") == 0)
+			else if (strcasecmp(matName, "crosswalk") == 0)
 				mat = SamplePolyAreas::SAMPLE_POLYAREA_CROSS;
-			else if (_stricmp(matName, "sidewalk") == 0)
+			else if (strcasecmp(matName, "sidewalk") == 0)
 				mat = SamplePolyAreas::SAMPLE_POLYAREA_GROUND;
-			else if (_stricmp(matName, "grass") == 0)
+			else if (strcasecmp(matName, "grass") == 0)
 				mat = SamplePolyAreas::SAMPLE_POLYAREA_GRASS;
 			else
 				mat = SamplePolyAreas::SAMPLE_POLYAREA_BLOCK;

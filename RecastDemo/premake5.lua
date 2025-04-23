@@ -93,6 +93,15 @@ project "DetourCrowd"
 		"../DetourCrowd/Include/*.h",
 		"../DetourCrowd/Source/*.cpp"
 	}
+    filter {"system:linux", "files:*.cpp" }
+		buildoptions {
+			"-Wno-error=class-memaccess",
+			"-Wno-error=maybe-uninitialized",
+            "-std=c++11",
+            "-Wno-unused-variable",
+            "-Wno-unused-but-set-variable", 
+		}
+
 
 project "DetourTileCache"
 	language "C++"
@@ -152,11 +161,13 @@ project "RecastDemo"
 
 	-- linux library cflags and libs
 	filter "system:linux"
+
 		buildoptions { 
 			"`pkg-config --cflags sdl2`",
 			"`pkg-config --cflags gl`",
 			"`pkg-config --cflags glu`",
 			"-Wno-ignored-qualifiers",
+            "-Wno-unused-variable",
 		}
 		linkoptions { 
 			"`pkg-config --libs sdl2`",
@@ -166,7 +177,7 @@ project "RecastDemo"
 
 	filter { "system:linux", "toolset:gcc", "files:*.c" }
 		buildoptions {
-			"-Wno-class-memaccess"
+			"-Wno-class-memaccess",
 		}
 
 	-- windows library cflags and libs
@@ -227,7 +238,7 @@ project "RecastBuilder"
 	targetdir "Bin"
 
 	-- linux library cflags and libs
-	configuration { "linux", "gmake" }
+	filter { "system:linux", }
 		buildoptions { 
 			"-Wno-ignored-qualifiers",
 			"-Wno-error=class-memaccess"
@@ -236,7 +247,7 @@ project "RecastBuilder"
 		}
 
 	-- windows library cflags and libs
-	configuration { "windows" }
+	filter { "system:windows" }
 		debugdir "../RecastBuilder/Bin/"
 		links { 
 		}
@@ -244,7 +255,7 @@ project "RecastBuilder"
 		}
 
 	-- mac includes and libs
-	configuration { "macosx" }
+	filter { "system:macosx" }
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		links { 
 			"Cocoa.framework",
@@ -281,7 +292,7 @@ project "RecastRebinary"
 	targetdir "Bin"
 
 	-- linux library cflags and libs
-	configuration { "linux", "gmake" }
+	filter { "system:linux" }
 		buildoptions { 
 			"-Wno-ignored-qualifiers",
 			"-Wno-error=class-memaccess"
@@ -290,7 +301,7 @@ project "RecastRebinary"
 		}
 
 	-- windows library cflags and libs
-	configuration { "windows" }
+	filter { "system:windows" }
 		debugdir "../RecastRebinary/Bin/"
 		links { 
 		}
@@ -298,7 +309,7 @@ project "RecastRebinary"
 		}
 
 	-- mac includes and libs
-	configuration { "macosx" }
+	filter { "system:macosx" }
 		kind "ConsoleApp" -- xcode4 failes to run the project if using WindowedApp
 		links { 
 			"Cocoa.framework",
