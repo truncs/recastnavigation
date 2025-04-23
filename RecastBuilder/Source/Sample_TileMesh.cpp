@@ -153,6 +153,10 @@ void Sample_TileMesh::handleRender()
 
 void Sample_TileMesh::handleRenderOverlay(double* proj, double* model, int* view)
 {
+    (void)proj; // Explicitly mark proj as unused
+    (void)model; // Explicitly mark model as unused
+    (void)view; // Explicitly mark view as unused
+
 }
 
 void Sample_TileMesh::handleMeshChanged(InputGeom* geom)
@@ -418,7 +422,6 @@ unsigned char* Sample_TileMesh::buildTileMesh(const int tx, const int ty, const 
 
 	const float* verts = m_geom->getMesh()->getVerts();
 	const int nverts = m_geom->getMesh()->getVertCount();
-	const int ntris = m_geom->getMesh()->getTriCount();
 	const rcChunkyTriMesh* chunkyMesh = m_geom->getChunkyMesh();
 
 	// Init build configuration from GUI

@@ -203,7 +203,7 @@ bool rcMeshLoaderObj::load(const std::string& filename)
 	int vcap = 0;
 	int tcap = 0;
 	char matName[1024];
-	char mat = SamplePolyAreas::SAMPLE_POLYAREA_GROUND;
+	char mat = SAMPLE_POLYAREA_GROUND;
 
 	while (src < srcEnd)
 	{
@@ -217,22 +217,22 @@ bool rcMeshLoaderObj::load(const std::string& filename)
 			// Vertex pos
 			sscanf(row+1, "%f %f %f", &x, &y, &z);
 			addVertex(x, y, z, vcap);
-			mat = SamplePolyAreas::SAMPLE_POLYAREA_GROUND;
+			mat = SAMPLE_POLYAREA_GROUND;
 		}
 		if (row[0] == 'u' && row[1] == 's')
 		{
 			memset(matName, 0, 1024);
 			sscanf(row+7, "%s", matName);
 			if (strcasecmp(matName, "road") == 0)
-				mat = SamplePolyAreas::SAMPLE_POLYAREA_ROAD;
+				mat = SAMPLE_POLYAREA_ROAD;
 			else if (strcasecmp(matName, "crosswalk") == 0)
-				mat = SamplePolyAreas::SAMPLE_POLYAREA_CROSS;
+				mat = SAMPLE_POLYAREA_CROSS;
 			else if (strcasecmp(matName, "sidewalk") == 0)
-				mat = SamplePolyAreas::SAMPLE_POLYAREA_GROUND;
+				mat = SAMPLE_POLYAREA_GROUND;
 			else if (strcasecmp(matName, "grass") == 0)
-				mat = SamplePolyAreas::SAMPLE_POLYAREA_GRASS;
+				mat = SAMPLE_POLYAREA_GRASS;
 			else
-				mat = SamplePolyAreas::SAMPLE_POLYAREA_BLOCK;
+				mat = SAMPLE_POLYAREA_BLOCK;
 		}
 		if (row[0] == 'f')
 		{

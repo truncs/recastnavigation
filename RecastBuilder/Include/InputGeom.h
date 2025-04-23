@@ -76,8 +76,16 @@ class InputGeom
 	float m_meshBMin[3], m_meshBMax[3];
 	BuildSettings m_buildSettings;
 	bool m_hasBuildSettings;
+    int m_offMeshConCount;
+    int m_volumeCount;
 	bool m_applyMaterialAsType;
-	
+    
+    /// @name Convex Volumes.
+	///@{
+	static const int MAX_VOLUMES = 256;
+	ConvexVolume m_volumes[MAX_VOLUMES];
+	///@}
+
 	/// @name Off-Mesh connections.
 	///@{
 	static const int MAX_OFFMESH_CONNECTIONS = 256;
@@ -87,15 +95,8 @@ class InputGeom
 	unsigned char m_offMeshConAreas[MAX_OFFMESH_CONNECTIONS];
 	unsigned short m_offMeshConFlags[MAX_OFFMESH_CONNECTIONS];
 	unsigned int m_offMeshConId[MAX_OFFMESH_CONNECTIONS];
-	int m_offMeshConCount;
 	///@}
 
-	/// @name Convex Volumes.
-	///@{
-	static const int MAX_VOLUMES = 256;
-	ConvexVolume m_volumes[MAX_VOLUMES];
-	int m_volumeCount;
-	///@}
 	
 	bool loadMesh(class rcContext* ctx, const std::string& filepath);
 	bool loadGeomSet(class rcContext* ctx, const std::string& filepath);

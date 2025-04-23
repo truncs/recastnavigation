@@ -95,8 +95,8 @@ struct SampleToolState {
 class Sample
 {
 public:
+    class InputGeom* m_geom;
 	class dtNavMesh* m_navMesh;
-	class InputGeom* m_geom;
 	class dtNavMeshQuery* m_navQuery;
 	class dtCrowd* m_crowd;
 

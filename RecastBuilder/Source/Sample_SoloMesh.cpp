@@ -92,6 +92,9 @@ void Sample_SoloMesh::handleRender()
 
 void Sample_SoloMesh::handleRenderOverlay(double* proj, double* model, int* view)
 {
+    (void)proj; // Explicitly mark proj as unused
+    (void)model; // Explicitly mark model as unused
+    (void)view; // Explicitly mark view as unused
 }
 
 void Sample_SoloMesh::handleMeshChanged(class InputGeom* geom)

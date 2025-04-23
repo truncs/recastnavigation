@@ -195,7 +195,7 @@ bool rcMeshLoaderObj::load(const std::string& filename)
 	int vcap = 0;
 	int tcap = 0;
 	char matName[1024];
-	char mat = SamplePolyAreas::CARLA_AREA_BLOCK;
+	char mat = CARLA_AREA_BLOCK;
 
 	while (src < srcEnd)
 	{
@@ -209,7 +209,7 @@ bool rcMeshLoaderObj::load(const std::string& filename)
 			// Vertex pos
 			sscanf(row+1, "%f %f %f", &x, &y, &z);
 			addVertex(x, y, z, vcap);
-			mat = SamplePolyAreas::CARLA_AREA_BLOCK;
+			mat = CARLA_AREA_BLOCK;
 		}
 		if (row[0] == 'u' && row[1] == 's')
 		{
@@ -217,15 +217,15 @@ bool rcMeshLoaderObj::load(const std::string& filename)
 			sscanf(row+7, "%s", matName);
 
 			if (strcmp(matName, "road") == 0)
-				mat = SamplePolyAreas::CARLA_AREA_ROAD;
+				mat = CARLA_AREA_ROAD;
 			else if (strcmp(matName, "crosswalk") == 0)
-				mat = SamplePolyAreas::CARLA_AREA_CROSSWALK;
+				mat = CARLA_AREA_CROSSWALK;
 			else if (strcmp(matName, "sidewalk") == 0)
-				mat = SamplePolyAreas::CARLA_AREA_SIDEWALK;
+				mat = CARLA_AREA_SIDEWALK;
 			else if (strcmp(matName, "grass") == 0)
-				mat = SamplePolyAreas::CARLA_AREA_GRASS;
+				mat = CARLA_AREA_GRASS;
 			else
-				mat = SamplePolyAreas::CARLA_AREA_BLOCK;
+				mat = CARLA_AREA_BLOCK;
 		}
 		if (row[0] == 'f')
 		{

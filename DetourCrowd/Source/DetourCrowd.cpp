@@ -1294,7 +1294,6 @@ void dtCrowd::update(const float dt, dtCrowdAgentDebugInfo* debug)
 	for (int i = 0; i < nagents; ++i)
 	{
 		dtCrowdAgent* ag = agents[i];
-		const int idx0 = getAgentIndex(ag);
 
 		if (ag->state != DT_CROWDAGENT_STATE_WALKING)
 			continue;
@@ -1543,8 +1542,8 @@ void dtCrowd::update(const float dt, dtCrowdAgentDebugInfo* debug)
 // return the max squared distance between point and segments (to know the radius of an agent with OBB)
 float dtCrowd::getMaxDistancePointSegments(const float *point, const float *segments, int total) {
 	// get the distance from point to all segments (4 segments per vehicle)
-	float seg_dist[4] { 0.0f, 0.0f, 0.0f, 0.0f };
-	float seg_per[4] { 0.0f, 0.0f, 0.0f, 0.0f };
+	float seg_dist[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	float seg_per[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 	// compute distance to segments
 	dtDistancePtPolyEdgesSqr(point, segments, total, seg_dist, seg_per);
@@ -1563,8 +1562,8 @@ float dtCrowd::getMaxDistancePointSegments(const float *point, const float *segm
 // return the min squared distance between point and segments
 float dtCrowd::getMinDistancePointSegments(const float *point, const float *segments, int total) {
 	// get the distance from point to all segments (4 segments per vehicle)
-	float seg_dist[4] { 0.0f, 0.0f, 0.0f, 0.0f };
-	float seg_per[4] { 0.0f, 0.0f, 0.0f, 0.0f };
+	float seg_dist[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	float seg_per[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 	// compute distance to segments
 	dtDistancePtPolyEdgesSqr(point, segments, total, seg_dist, seg_per);
@@ -1626,8 +1625,6 @@ float dtCrowd::getDistanceBetweenAgentsSqr(int index1, int index2) {
 float dtCrowd::getPenetrationBetweenAgents(int index1, int index2) {
     const dtCrowdAgent *agent1 = &m_agents[index1];
     const dtCrowdAgent *agent2 = &m_agents[index2];
-    float radius1 = 0.0f;
-    float radius2 = 0.0f;
     float dist12 = 0.0f;
     float dist21 = 0.0f;
 
@@ -1635,14 +1632,12 @@ float dtCrowd::getPenetrationBetweenAgents(int index1, int index2) {
     if (agent1->params.useObb)
     {
         dist21 = dtMathSqrtf(getMinDistancePointSegments(agent2->npos, agent1->params.obb, 4));
-        radius1 = dtMathSqrtf(getMaxDistancePointSegments(agent1->npos, agent1->params.obb, 4));
     }
 
     // check if agent want to use the oriented bounding box instead of only a radius
     if (agent2->params.useObb)
     {
         dist12 = dtMathSqrtf(getMinDistancePointSegments(agent1->npos, agent2->params.obb, 4));
-        radius2 = dtMathSqrtf(getMaxDistancePointSegments(agent2->npos, agent2->params.obb, 4));
     }
 
     // check if both are boxes
